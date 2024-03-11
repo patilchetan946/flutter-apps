@@ -27,6 +27,18 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController userNameTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
 
+/*  
+KEYS - to Uniquely identify widget is true
+
+  - same widgets in same tree and at the same level CANNOT have same key 
+  - Key accepts String
+  - When we use Key of FFORMSTATE we require ONLY ONE global key.
+  - Global Key helps use to create instance of another class and we can make use of any method from that class
+  - here we are using VALIDATE() method from FormState
+  - formStates validate () method internally calls to FormFieldState's validate() and uses for loop.AboutDialog
+  - function in validator of TextFormField is called by Flutter engine according to key
+*/
+
   //KEYS
   //GlobalKey<FormFieldState> userNameKey = GlobalKey<FormFieldState>();
   //GlobalKey<FormFieldState> passwordKey = GlobalKey<FormFieldState>();
@@ -99,7 +111,6 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   suffixIcon: const Icon(
                     Icons.remove_red_eye_outlined,
-                    
                   ),
                 ),
                 validator: (value) {
