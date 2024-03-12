@@ -3,6 +3,16 @@ import 'package:adv_todo/tododatabase.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
+List<Taskclass> cardlist = [];
+List<Taskclass> obj2 = [];
+
+void getData() async {
+  cardlist = await getTaskData();
+  for (int i = 0; i < cardlist.length; i++) {
+    obj2.add(cardlist[i]);
+  }
+}
+
 dynamic database;
 
 class Taskclass {
@@ -24,11 +34,6 @@ class Taskclass {
       "desp": desp,
       "date": date,
     };
-  }
-
-  @override
-  String toString() {
-    return "{taskId:$taskId,title:$title,desp$desp,date$date}";
   }
 }
 
@@ -84,7 +89,7 @@ void main() async {
     version: 1,
     onCreate: (db, version) {
       db.execute('''CREATE TABLE Task(
-        taskId INT PRIMARY KEY,
+        taskId INT PRIMARY KEY AUTOINCREMENT,
         title TEXT,
         desp TEXT,
         date INT
@@ -92,6 +97,15 @@ void main() async {
       )''');
     },
   );
+
+  Taskclass task1 = Taskclass(
+    title: "Chetan",
+    desp: "patil",
+    date: "27 july",
+  );
+
+  insertTaskData(task1);
+  print(getTaskData());
 }
 
 class MainApp extends StatelessWidget {

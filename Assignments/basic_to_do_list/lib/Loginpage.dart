@@ -9,14 +9,20 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
+class User {
+  final String? userid;
+  final String? password;
+  const User({this.userid, this.password});
+}
+
 class _LoginPageState extends State<LoginPage> {
   //CONTROLLERS
   TextEditingController userNameTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
 
-  //KEYS
-  //GlobalKey<FormFieldState> userNameKey = GlobalKey<FormFieldState>();
-  //GlobalKey<FormFieldState> passwordKey = GlobalKey<FormFieldState>();
+  List userdata = [
+    const User(userid: "patilchetan", password: "patilchetan123")
+  ];
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -51,128 +57,134 @@ class _LoginPageState extends State<LoginPage> {
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20))),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              const SizedBox(height: 10),
-              Image.network(
-                "https://cdni.iconscout.com/illustration/premium/thumb/todo-list-6114062-5059486.png?f=webp",
-                height: 190,
-                width: 190,
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: userNameTextEditingController,
-                //key:userNameKey,
-                decoration: InputDecoration(
-                  hintText: "Enter username",
-                  label: const Text("Enter username"),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  prefixIcon: const Icon(
-                    Icons.person,
-                  ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 20,
                 ),
-                validator: (value) {
-                  print("IN USERNAME VALIDATOR");
-                  if (value == null || value.isEmpty) {
-                    return "Please enter username";
-                  } else {
-                    return null;
-                  }
-                },
-                keyboardType: TextInputType.emailAddress,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                controller: passwordTextEditingController,
-                //key: passwordKey,
-                obscureText: passVisible ? false : true,
-                obscuringCharacter: "*",
-                decoration: InputDecoration(
-                  hintText: "Enter username",
-                  label: const Text("Enter username"),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  prefixIcon: const Icon(
-                    Icons.lock,
+                const SizedBox(height: 10),
+                Image.network(
+                  "https://cdni.iconscout.com/illustration/premium/thumb/todo-list-6114062-5059486.png?f=webp",
+                  height: 180,
+                  width: 180,
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: userNameTextEditingController,
+                  //key:userNameKey,
+                  decoration: InputDecoration(
+                    hintText: "Enter username",
+                    label: const Text("Enter username"),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    prefixIcon: const Icon(
+                      Icons.person,
+                    ),
                   ),
-                  suffixIcon: IconButton(
+                  validator: (value) {
+                    print("IN USERNAME VALIDATOR");
+                    if (value == null || value.isEmpty) {
+                      return "Please enter username";
+                    } else {
+                      return null;
+                    }
+                  },
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  controller: passwordTextEditingController,
+                  //key: passwordKey,
+                  obscureText: passVisible ? false : true,
+                  obscuringCharacter: "*",
+                  decoration: InputDecoration(
+                    hintText: "Enter username",
+                    label: const Text("Enter username"),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    prefixIcon: const Icon(
+                      Icons.lock,
+                    ),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          passVisible = !passVisible;
+                        });
+                      },
+                      icon: Icon(
+                        passVisible ? Icons.visibility : Icons.visibility_off,
+                        color: Colors.purple,
+                      ),
+                    ),
+                  ),
+                  validator: (value) {
+                    print("IN PASSWORD VALIDATOR");
+                    if (value == null || value.isEmpty) {
+                      return "Please enter password";
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  height: 50,
+                  width: 400,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            const MaterialStatePropertyAll(Colors.purple),
+                        shape: MaterialStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                        )),
                     onPressed: () {
-                      setState(() {
-                        passVisible = !passVisible;
-                      });
+                      bool loginValidated = _formKey.currentState!.validate();
+                      if (loginValidated) {
+                        if (userNameTextEditingController.text ==
+                                userdata[0].userid &&
+                            passwordTextEditingController.text ==
+                                userdata[0].password) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("Login Successful"),
+                              backgroundColor: Colors.green,
+                            ),
+                          );
+                          _loggedin = true;
+                          showNextPage();
+                          setState(() {});
+                        } else {
+                          _loggedin = false;
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("login Failed"),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
+                      }
                     },
-                    icon: Icon(
-                      passVisible ? Icons.visibility : Icons.visibility_off,
-                      color: Colors.purple,
+                    child: Text(
+                      "Login",
+                      style: GoogleFonts.quicksand(
+                          fontWeight: FontWeight.w700, fontSize: 25),
                     ),
                   ),
                 ),
-                validator: (value) {
-                  print("IN PASSWORD VALIDATOR");
-                  if (value == null || value.isEmpty) {
-                    return "Please enter password";
-                  } else {
-                    return null;
-                  }
-                },
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                height: 50,
-                width: 400,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          const MaterialStatePropertyAll(Colors.purple),
-                      shape: MaterialStatePropertyAll(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40),
-                        ),
-                      )),
-                  onPressed: () {
-                    _loggedin = true;
-                    showNextPage();
-                    setState(() {});
-                    bool loginValidated = _formKey.currentState!.validate();
-                    if (loginValidated) {
-                      _loggedin = true;
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Login Successful"),
-                          backgroundColor: Colors.green,
-                        ),
-                      );
-                    } else {
-                      _loggedin = false;
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("login Failed"),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                    }
-                  },
-                  child: Text(
-                    "Login",
-                    style: GoogleFonts.quicksand(
-                        fontWeight: FontWeight.w700, fontSize: 25),
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

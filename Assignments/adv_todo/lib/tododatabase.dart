@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class TODOAppUI extends StatefulWidget {
-  const TODOAppUI({Key? key}) : super(key: key);
+  const TODOAppUI({super.key});
 
   @override
   State<TODOAppUI> createState() => _TODOAppUIState();
@@ -20,7 +20,7 @@ class TODOAppUI extends StatefulWidget {
 //       {required this.title, required this.description, required this.date});
 // }
 
-List<Taskclass> cardlist = [];
+//List<Taskclass> cardlist = [];
 
 class _TODOAppUIState extends State<TODOAppUI> {
   ///Text Editing Controllers
@@ -45,14 +45,14 @@ class _TODOAppUIState extends State<TODOAppUI> {
               title: titleController.text.trim(),
               desp: descriptionController.text.trim(),
               date: dateController.text.trim()));
-          getTaskData();
+          getData();
         });
       } else {
         setState(() {
           taskclassobj!.date = dateController.text.trim();
           taskclassobj.title = titleController.text.trim();
           taskclassobj.desp = descriptionController.text.trim();
-          getTaskData();
+          getData();
         });
       }
       getTaskData();
