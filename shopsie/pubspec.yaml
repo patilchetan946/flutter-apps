@@ -1,0 +1,38 @@
+name: shopsie
+description: A new Flutter project.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.0.6 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_fonts: ^6.1.0
+  flutter_slidable: ^3.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+   - assets\splash_1.png
+   - assets\Logo-google-icon-PNG.png
+   - assets\fb.png
+   - assets\twitter_x_.png
+   - assets\Image Banner 2.png
+   - assets\Image Banner 3.png
+   - assets\Image Popular Product 1.png
+   - assets\Image Popular Product 2.png
+   - assets\Image Popular Product 3.png
+   - assets\ps4_console_white_1.png
+   - assets\ps4_console_white_2.png
+   - assets\ps4_console_white_3.png
+   - assets\ps4_console_white_4.png
+   - assets\success.png
+   - assets\Profile Image.png
+   - assets\wireless headset.png
