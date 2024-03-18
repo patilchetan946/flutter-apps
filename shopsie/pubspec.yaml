@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
   google_fonts: ^6.1.0
   flutter_slidable: ^3.0.0
+  sqflite: 2.3.0
+  path: 1.8.3
 
 dev_dependencies:
   flutter_test:
@@ -36,3 +38,6 @@ flutter:
    - assets\success.png
    - assets\Profile Image.png
    - assets\wireless headset.png
+   - assets\cat.png
+   - assets\glap.png
+   - assets\product 1 image.png

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopsie/bottomnavigationbar.dart';
 import 'package:shopsie/success.dart';
+import 'package:shopsie/main.dart';
 
 class CardDetails extends StatefulWidget {
   const CardDetails({super.key});
@@ -25,10 +26,227 @@ class _CardDetailsState extends State {
     "assets/ps4_console_white_3.png",
     "assets/ps4_console_white_4.png",
   ];
+//-----------------------------------------------------------------INSERT METHOD------------------------------------------------------>
+  void insertdata() async {
+    obj1.clear();
+    await getdata();
+    print(await getdata());
+
+    setState(() {});
+  }
+
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+
+  void submit() {
+    if (nameController.text.trim().isNotEmpty &&
+        addressController.text.trim().isNotEmpty &&
+        phoneController.text.trim().isNotEmpty) {
+      CartModelclass obj = CartModelclass(
+          name: nameController.text.trim(),
+          address: addressController.text.trim(),
+          phone: phoneController.text.trim());
+      insertOrderData(obj);
+      insertdata();
+      setState(() {});
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return const Success();
+      }));
+      clearController();
+    }
+  }
+
+  clearController() {
+    nameController.clear();
+    addressController.clear();
+    phoneController.clear();
+  }
+
+  final _formKey = GlobalKey<FormState>();
+
+  Future<void> showBottomSht() async {
+    await showModalBottomSheet(
+      isScrollControlled: true,
+      isDismissible: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(30),
+        ),
+      ),
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            left: 15,
+            right: 15,
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Details",
+                style: GoogleFonts.quicksand(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 22,
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Name",
+                      style: GoogleFonts.quicksand(
+                        color: const Color.fromARGB(255, 255, 112, 56),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 15,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 3,
+                    ),
+                    TextFormField(
+                      controller: nameController,
+                      decoration: InputDecoration(
+                        hintText: "Enter Name",
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 255, 112, 56),
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.red),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    Text(
+                      "Address",
+                      style: GoogleFonts.quicksand(
+                        color: const Color.fromARGB(255, 255, 112, 56),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 15,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 3,
+                    ),
+                    TextFormField(
+                      controller: addressController,
+                      maxLines: 4,
+                      decoration: InputDecoration(
+                        hintText: "Enter Address",
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 255, 112, 56),
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: const BorderSide(),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.red),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    Text(
+                      "Phone No.",
+                      style: GoogleFonts.quicksand(
+                        color: const Color.fromARGB(255, 255, 112, 56),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 15,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 3,
+                    ),
+                    TextFormField(
+                      controller: phoneController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        hintText: "Enter Number",
+                        suffixIcon: const Icon(Icons.phone_android_rounded),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 255, 112, 56),
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: const BorderSide(),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.red),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                height: 50,
+                width: 300,
+                margin: const EdgeInsets.all(10),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(30)),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        13,
+                      ),
+                    ),
+                    backgroundColor: const Color.fromARGB(255, 255, 112, 56),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    submit();
+                  },
+                  child: Text(
+                    "Place Order",
+                    style: GoogleFonts.inter(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 245, 246, 249),
+      backgroundColor: const Color.fromARGB(255, 234, 234, 236),
       extendBody: true,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -62,8 +280,6 @@ class _CardDetailsState extends State {
         ),
         actions: [
           Container(
-            //  height: 100,
-
             margin: const EdgeInsets.only(right: 10),
             padding: const EdgeInsets.only(top: 2, bottom: 2, left: 10),
             decoration: BoxDecoration(
@@ -98,7 +314,7 @@ class _CardDetailsState extends State {
           const SizedBox(height: 25),
           Container(
             height: 340,
-            color: const Color.fromARGB(255, 245, 246, 249),
+            color: const Color.fromARGB(255, 234, 234, 236),
             width: double.infinity,
             child: Column(
               children: [
@@ -118,7 +334,9 @@ class _CardDetailsState extends State {
                           brdrclr4 = false;
                         });
                       },
-                      //how to show containers as selected without taking multiple flags ?
+//how to show containers as selected without taking multiple flags ?
+// Here Multiple flags has been taken to display the individual border around containers when tap n it.
+// To show the image in backaground on tap images has been fetched from the list and the imdex has been set on tap.
                       child: Container(
                         padding: const EdgeInsets.all(6),
                         margin: const EdgeInsets.only(right: 16),
@@ -265,7 +483,7 @@ class _CardDetailsState extends State {
                         Row(
                           children: [
                             Text(
-                              "Rs 2000-/",
+                              "Rs 2000/-",
                               style: GoogleFonts.quicksand(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 25,
@@ -453,25 +671,22 @@ class _CardDetailsState extends State {
                               child: Column(
                                 children: [
                                   const SizedBox(height: 15),
-                                  Container(
-                                    alignment: Alignment.center,
-                                    height: 70,
-                                    width: 300,
-                                    decoration: BoxDecoration(
-                                        color: const Color.fromARGB(
-                                            255, 255, 112, 56),
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20, vertical: 12),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        Navigator.pushReplacement(context,
-                                            MaterialPageRoute(
-                                                builder: (context) {
-                                          return const Success();
-                                        }));
-                                      },
+                                  GestureDetector(
+                                    onTap: () async {
+                                      await showBottomSht();
+                                      clearController();
+                                    },
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      height: 60,
+                                      width: 270,
+                                      decoration: BoxDecoration(
+                                          color: const Color.fromARGB(
+                                              255, 255, 112, 56),
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 12),
                                       child: const Text(
                                         "Add To Cart",
                                         style: TextStyle(

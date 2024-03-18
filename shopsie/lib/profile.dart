@@ -45,7 +45,9 @@ class _ProfileState extends State {
             child: GestureDetector(
               onTap: () {
                 setState(() {
-                  const Homepage();
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const Homepage();
+                  }));
                 });
               },
               child: const Icon(
@@ -64,7 +66,10 @@ class _ProfileState extends State {
               height: 130,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/Profile Image.png")),
+                  image: AssetImage(
+                    "assets/cat.png",
+                  ),
+                ),
                 shape: BoxShape.circle,
               ),
             ),

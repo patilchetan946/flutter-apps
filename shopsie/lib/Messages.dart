@@ -16,7 +16,7 @@ class _MsgState extends State {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        toolbarHeight: 120,
+        toolbarHeight: 100,
         elevation: 0,
         centerTitle: true,
         title: const Text(

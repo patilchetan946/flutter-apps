@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopsie/carddetails.dart';
+import 'package:shopsie/order.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -49,7 +50,14 @@ class _HomepageState extends State {
                           shape: BoxShape.circle,
                           color: Color.fromARGB(255, 245, 246, 249)),
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (context) {
+                              return const Order();
+                            }));
+                          });
+                        },
                         icon: const Icon(Icons.trolley),
                       ),
                     ),

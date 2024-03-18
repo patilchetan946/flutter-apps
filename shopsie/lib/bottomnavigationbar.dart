@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopsie/Messages.dart';
+import 'package:shopsie/favroite.dart';
 import 'package:shopsie/homescreen.dart';
 import 'package:shopsie/profile.dart';
 
@@ -14,7 +15,7 @@ class _BtmNavgtnBarState extends State {
 
   final List<Widget> _widgetOptions = <Widget>[
     const Homepage(),
-    const Homepage(),
+    const Favourite(),
     const Msg(),
     const Profile(),
   ];

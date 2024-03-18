@@ -37,21 +37,21 @@ class _SuccessState extends State {
             style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
           ),
           const SizedBox(height: 50),
-          Container(
-            alignment: Alignment.center,
-            height: 60,
-            width: 250,
-            decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 255, 112, 56),
-                borderRadius: BorderRadius.circular(20)),
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) {
-                  return const BtmNavgtnBar();
-                }));
-              },
+          GestureDetector(
+            onTap: () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) {
+                return const BtmNavgtnBar();
+              }));
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 60,
+              width: 250,
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 255, 112, 56),
+                  borderRadius: BorderRadius.circular(20)),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               child: const Text(
                 "Back to home",
                 style: TextStyle(
