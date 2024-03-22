@@ -40,9 +40,7 @@ class _LoginState extends State {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  List userdata = [
-    const User(userid: "patilchetan", password: "patilchetan123")
-  ];
+  List userdata = [const User(userid: "chetan", password: "patil123")];
 
   loginScreen() {
     if (count == 0) {

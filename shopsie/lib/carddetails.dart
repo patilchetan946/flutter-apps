@@ -334,9 +334,9 @@ class _CardDetailsState extends State {
                           brdrclr4 = false;
                         });
                       },
-//how to show containers as selected without taking multiple flags ?
-// Here Multiple flags has been taken to display the individual border around containers when tap n it.
-// To show the image in backaground on tap images has been fetched from the list and the imdex has been set on tap.
+
+                      // Here Multiple flags has been taken to display the individual border around containers when tap n it.
+                      // To show the image in backaground on tap images has been fetched from the list and the imdex has been set on tap.
                       child: Container(
                         padding: const EdgeInsets.all(6),
                         margin: const EdgeInsets.only(right: 16),
@@ -451,14 +451,11 @@ class _CardDetailsState extends State {
           ),
           Expanded(
             child: Container(
-              width: double.infinity,
               decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40),
-                  topRight: Radius.circular(40),
-                ),
-              ),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40)),
+                  color: Colors.white),
               child: Column(
                 children: [
                   Container(
@@ -554,163 +551,150 @@ class _CardDetailsState extends State {
                       ],
                     ),
                   ),
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.only(top: 20),
-                      decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 245, 246, 249),
-                        borderRadius: BorderRadius.only(
+                  Container(
+                    height: 120,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(40),
-                          topRight: Radius.circular(40),
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 10),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Container(
-                                height: 30,
-                                width: 30,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.red,
-                                ),
-                              ),
-                              Container(
-                                height: 30,
-                                width: 30,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.purple,
-                                ),
-                              ),
-                              Container(
-                                height: 30,
-                                width: 30,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.orangeAccent,
-                                ),
-                              ),
-                              Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white,
-                                    border: Border.all(
-                                        color: const Color.fromARGB(
-                                            255, 255, 112, 56),
-                                        width: 2)),
-                              ),
-                              const SizedBox(width: 20),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    count++;
-                                  });
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  height: 40,
-                                  width: 40,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: const Icon(Icons.add),
-                                ),
-                              ),
-                              Text(
-                                "$count",
-                                style: const TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.w600),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    if (count == 0) {
-                                      return;
-                                    } else {
-                                      count--;
-                                    }
-                                  });
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  height: 40,
-                                  width: 40,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: const Text(
-                                    "-",
-                                    style: TextStyle(
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                              ),
-                            ],
+                          topRight: Radius.circular(40)),
+                      color: Color.fromARGB(255, 234, 234, 236),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          height: 30,
+                          width: 30,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.red,
                           ),
-                          const SizedBox(height: 20),
-                          Expanded(
-                            child: Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.only(top: 20),
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(40),
-                                  topRight: Radius.circular(40),
-                                ),
-                              ),
-                              child: Column(
-                                children: [
-                                  const SizedBox(height: 15),
-                                  GestureDetector(
-                                    onTap: () async {
-                                      await showBottomSht();
-                                      clearController();
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      height: 60,
-                                      width: 270,
-                                      decoration: BoxDecoration(
-                                          color: const Color.fromARGB(
-                                              255, 255, 112, 56),
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 12),
-                                      child: const Text(
-                                        "Add To Cart",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                ],
-                              ),
+                        ),
+                        Container(
+                          height: 30,
+                          width: 30,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.purple,
+                          ),
+                        ),
+                        Container(
+                          height: 30,
+                          width: 30,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.orangeAccent,
+                          ),
+                        ),
+                        Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white,
+                              border: Border.all(
+                                  color:
+                                      const Color.fromARGB(255, 255, 112, 56),
+                                  width: 2)),
+                        ),
+                        const SizedBox(width: 20),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              count++;
+                            });
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 40,
+                            width: 40,
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(Icons.add),
+                          ),
+                        ),
+                        Text(
+                          "$count",
+                          style: const TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.w600),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              if (count == 0) {
+                                return;
+                              } else {
+                                count--;
+                              }
+                            });
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 40,
+                            width: 40,
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Text(
+                              "-",
+                              style: TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.w500),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  )
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                        // color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40),
+                    )),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        GestureDetector(
+                          onTap: () async {
+                            await showBottomSht();
+                            clearController();
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 60,
+                            width: 270,
+                            decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 255, 112, 56),
+                                borderRadius: BorderRadius.circular(20)),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 12),
+                            child: const Text(
+                              "Add To Cart",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );

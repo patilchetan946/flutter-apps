@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopsie/bottomnavigationbar.dart';
 import 'package:shopsie/homescreen.dart';
 
 class Favourite extends StatefulWidget {
@@ -40,7 +41,7 @@ class _FavouriteState extends State {
               onTap: () {
                 setState(() {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const Homepage();
+                    return const BtmNavgtnBar();
                   }));
                 });
               },
@@ -141,7 +142,7 @@ class _FavouriteState extends State {
                   const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
-                      "Wireless Controller \nFor PS4",
+                      "Gloves XC Omega \nFor Bikes",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
@@ -168,15 +169,9 @@ class _FavouriteState extends State {
                           shape: BoxShape.circle,
                         ),
                         child: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _isFavourite = !_isFavourite;
-                            });
-                          },
-                          icon: Icon(
-                            _isFavourite
-                                ? Icons.favorite
-                                : Icons.favorite_border_rounded,
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.favorite,
                             color: Colors.pink,
                             size: 25,
                           ),
@@ -212,7 +207,7 @@ class _FavouriteState extends State {
                   const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
-                      "Wireless Controller \nFor PS4",
+                      " Denim T-shrit \n",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
@@ -222,7 +217,7 @@ class _FavouriteState extends State {
                       const Padding(
                         padding: EdgeInsets.all(8),
                         child: Text(
-                          "Rs 2000/-",
+                          "Rs 1000/-",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
@@ -272,7 +267,7 @@ class _FavouriteState extends State {
                   const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
-                      "Wireless Controller \nFor PS4",
+                      "Wireless Headset \nLogitech",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
