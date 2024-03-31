@@ -1,19 +1,9 @@
+import 'package:adv_todo/login.dart';
 import 'package:flutter/material.dart';
-import 'package:adv_todo/tododatabase.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-List<Taskclass> cardlist = [];
-List<Taskclass> obj2 = [];
-
-void getData() async {
-  cardlist = await getTaskData();
-  for (int i = 0; i < cardlist.length; i++) {
-    obj2.add(cardlist[i]);
-  }
-}
-
-dynamic database;
+List cardlist = [];
 
 class Taskclass {
   int? taskId;
@@ -35,12 +25,39 @@ class Taskclass {
       "date": date,
     };
   }
+
+  @override
+  String toString() {
+    return 'title:$title,desc:$desp,date:$date';
+  }
 }
 
-Future<List<Taskclass>> getTaskData() async {
-  final localDB = await database;
+//--------------------------------DATABASE------------------------------------>
+dynamic database;
 
-  List<Map<String, dynamic>> mapEntry = await localDB.query("Task");
+Future<void> createDatabase() async {
+  database = await openDatabase(
+    join(await getDatabasesPath(), "TodoDB.db"),
+    version: 1,
+    onCreate: (db, version) async {
+      print("Creating TodoTask table...");
+      await db.execute('''CREATE TABLE IF NOT EXISTS TodoTask1(
+        taskId INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT,
+        desp TEXT,
+        date INT 
+      )''');
+    },
+  );
+  await getTaskData();
+  print("Database created successfully.");
+}
+
+//--------------------------------GET DATA------------------------------------>
+Future<List> getTaskData() async {
+  final localDB = database;
+
+  List<Map<String, dynamic>> mapEntry = await localDB.query("TodoTask1");
   return List.generate(mapEntry.length, (i) {
     return Taskclass(
       taskId: mapEntry[i]["taskId"],
@@ -52,60 +69,49 @@ Future<List<Taskclass>> getTaskData() async {
 }
 
 //--------------------------------INSERT QUERY------------------------------------>
-Future<void> insertTaskData(Taskclass task) async {
+Future<void> insertTaskData(Taskclass taskclassobj) async {
   final localDB = await database;
 
-  localDB.insert(
-    "Taskclass",
-    task.taskMap(),
+  await localDB.insert(
+    "TodoTask1",
+    taskclassobj.taskMap(),
     conflictAlgorithm: ConflictAlgorithm.replace,
   );
+  cardlist = await getTaskData();
 }
 
 //--------------------------------UPDATE QUERY------------------------------------>
 
-Future<void> updateTaskData(Taskclass obj) async {
+Future<void> updateTaskData(Taskclass taskclassobj) async {
   final localDB = await database;
-  await localDB.update("Taskclass", obj.taskMap(),
-      where: "taskId = ?", whereArgs: [obj.taskId]);
+  await localDB.update("TodoTask1", taskclassobj.taskMap(),
+      where: "taskId = ?", whereArgs: [taskclassobj.taskId]);
+
+  cardlist = await getTaskData();
 }
 //-------------------------------DELETE QUERY------------------------------------->
 
-Future<void> deleteTaskData(Taskclass task) async {
+Future<void> deleteTaskData(Taskclass taskclassobj) async {
   final localDb = await database;
 
   await localDb.delete(
-    "Task",
+    "TodoTask1",
     where: "taskId = ?",
-    whereArgs: [task.taskId],
+    whereArgs: [taskclassobj.taskId],
   );
+
+  cardlist = await getTaskData();
+}
+
+void getdata() async {
+  cardlist = await getTaskData();
 }
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await createDatabase();
+  getdata();
   runApp(const MainApp());
-
-  database = openDatabase(
-    join(await getDatabasesPath(), "todoDB.db"),
-    version: 1,
-    onCreate: (db, version) {
-      db.execute('''CREATE TABLE Task(
-        taskId INT PRIMARY KEY AUTOINCREMENT,
-        title TEXT,
-        desp TEXT,
-        date INT
-        
-      )''');
-    },
-  );
-
-  Taskclass task1 = Taskclass(
-    title: "Chetan",
-    desp: "patil",
-    date: "27 july",
-  );
-
-  insertTaskData(task1);
-  print(getTaskData());
 }
 
 class MainApp extends StatelessWidget {
@@ -114,7 +120,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: TODOAppUI(),
+      home: LoginPage(),
     );
   }
 }

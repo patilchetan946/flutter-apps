@@ -1,3 +1,4 @@
+import 'package:adv_todo/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,41 +11,37 @@ class TODOAppUI extends StatefulWidget {
   State<TODOAppUI> createState() => _TODOAppUIState();
 }
 
-class TODOModelclass {
-  String? title;
-  String? description;
-  String? date;
-
-  TODOModelclass(
-      {required this.title, required this.description, required this.date});
-}
-
-List<TODOModelclass> cardlist = [];
-
 class _TODOAppUIState extends State<TODOAppUI> {
   ///Text Editing Controllers
   final TextEditingController dateController = TextEditingController();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
-  void submit(bool doedit, [TODOModelclass? tODOModelclassobj]) {
+  @override
+  void initState() {
+    super.initState();
+
+    // createDatabase();
+  }
+
+  Future<void> submit(bool doedit, [Taskclass? taskclassobj]) async {
     if (titleController.text.trim().isNotEmpty &&
         descriptionController.text.trim().isNotEmpty &&
         dateController.text.trim().isNotEmpty) {
       if (!doedit) {
-        setState(() {
-          cardlist.add(TODOModelclass(
-              title: titleController.text.trim(),
-              description: descriptionController.text.trim(),
-              date: dateController.text.trim()));
-        });
+        await insertTaskData(Taskclass(
+            title: titleController.text.trim(),
+            desp: descriptionController.text.trim(),
+            date: dateController.text.trim()));
+        setState(() {});
       } else {
-        setState(() {
-          tODOModelclassobj!.date = dateController.text.trim();
-          tODOModelclassobj.title = titleController.text.trim();
-          tODOModelclassobj.description = descriptionController.text.trim();
-        });
+        taskclassobj!.date = dateController.text.trim();
+        taskclassobj.title = titleController.text.trim();
+        taskclassobj.desp = descriptionController.text.trim();
+        await updateTaskData(taskclassobj);
+        setState(() {});
       }
+
       clearController();
     }
   }
@@ -55,25 +52,24 @@ class _TODOAppUIState extends State<TODOAppUI> {
     dateController.clear();
   }
 
-  void removeTasks(TODOModelclass toDoModelclassobj) {
+  void removeTasks(Taskclass taskclassobj) {
     setState(() {
-      cardlist.remove(toDoModelclassobj);
+      cardlist.remove(taskclassobj);
     });
   }
 
-  void editTask(TODOModelclass todoModelObj) {
-    titleController.text = todoModelObj.title!;
-    descriptionController.text = todoModelObj.description!;
-    dateController.text = todoModelObj.date!;
+  void editTask(Taskclass taskclassObj) {
+    titleController.text = taskclassObj.title;
+    descriptionController.text = taskclassObj.desp;
+    dateController.text = taskclassObj.date;
 
-    showBottomSht(true, todoModelObj);
+    showBottomSht(true, taskclassObj);
   }
 
   final _formKey = GlobalKey<FormState>();
 
-  Future<void> showBottomSht(bool doEdit,
-      [TODOModelclass? todoModelObj]) async {
-    await showModalBottomSheet(
+  void showBottomSht(bool doEdit, [Taskclass? taskclassObj]) {
+    showModalBottomSheet(
       isScrollControlled: true,
       isDismissible: true,
       shape: const RoundedRectangleBorder(
@@ -243,7 +239,7 @@ class _TODOAppUIState extends State<TODOAppUI> {
                   ),
                   onPressed: () {
                     Navigator.of(context).pop();
-                    doEdit ? submit(doEdit, todoModelObj) : submit(doEdit);
+                    doEdit ? submit(doEdit, taskclassObj) : submit(doEdit);
                   },
                   child: Text(
                     "Submit",
@@ -263,6 +259,7 @@ class _TODOAppUIState extends State<TODOAppUI> {
 
   @override
   Widget build(BuildContext context) {
+    getTaskData();
     return Scaffold(
       backgroundColor: const Color.fromRGBO(111, 81, 255, 1),
       body: Padding(
@@ -382,6 +379,7 @@ class _TODOAppUIState extends State<TODOAppUI> {
                                         GestureDetector(
                                           onTap: () {
                                             removeTasks(cardlist[index]);
+                                            setState(() {});
                                           },
                                           child: Container(
                                             padding: const EdgeInsets.all(10),
@@ -468,7 +466,7 @@ class _TODOAppUIState extends State<TODOAppUI> {
                                                 height: 5,
                                               ),
                                               Text(
-                                                "${cardlist[index].description}",
+                                                "${cardlist[index].desp}",
                                                 style: GoogleFonts.inter(
                                                   color: const Color.fromRGBO(
                                                       0, 0, 0, 0.7),
@@ -519,8 +517,8 @@ class _TODOAppUIState extends State<TODOAppUI> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color.fromRGBO(89, 57, 241, 1),
-        onPressed: () async {
-          await showBottomSht(false);
+        onPressed: () {
+          showBottomSht(false);
           clearController();
         },
         child: const Icon(
