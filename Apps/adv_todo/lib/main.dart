@@ -32,7 +32,7 @@ class Taskclass {
   }
 }
 
-//--------------------------------DATABASE------------------------------------>
+//-----------------------------------------------------DATABASE------------------------------------------------->
 dynamic database;
 
 Future<void> createDatabase() async {
@@ -53,7 +53,7 @@ Future<void> createDatabase() async {
   print("Database created successfully.");
 }
 
-//--------------------------------GET DATA------------------------------------>
+//-----------------------------------------------------GET DATA--------------------------------------------------->
 Future<List> getTaskData() async {
   final localDB = database;
 
@@ -68,7 +68,7 @@ Future<List> getTaskData() async {
   });
 }
 
-//--------------------------------INSERT QUERY------------------------------------>
+//------------------------------------------------------INSERT QUERY---------------------------------------------->
 Future<void> insertTaskData(Taskclass taskclassobj) async {
   final localDB = await database;
 
@@ -80,7 +80,7 @@ Future<void> insertTaskData(Taskclass taskclassobj) async {
   cardlist = await getTaskData();
 }
 
-//--------------------------------UPDATE QUERY------------------------------------>
+//------------------------------------------------------UPDATE QUERY---------------------------------------------->
 
 Future<void> updateTaskData(Taskclass taskclassobj) async {
   final localDB = await database;
@@ -89,7 +89,7 @@ Future<void> updateTaskData(Taskclass taskclassobj) async {
 
   cardlist = await getTaskData();
 }
-//-------------------------------DELETE QUERY------------------------------------->
+//------------------------------------------------------DELETE QUERY---------------------------------------------->
 
 Future<void> deleteTaskData(Taskclass taskclassobj) async {
   final localDb = await database;
@@ -99,8 +99,6 @@ Future<void> deleteTaskData(Taskclass taskclassobj) async {
     where: "taskId = ?",
     whereArgs: [taskclassobj.taskId],
   );
-
-  cardlist = await getTaskData();
 }
 
 void getdata() async {
@@ -121,6 +119,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       home: LoginPage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

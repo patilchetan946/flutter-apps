@@ -1,4 +1,4 @@
-import 'package:dailyflash_1/assign60.dart';
+import 'package:dailyflash_1/assign61.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,7 +11,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Assign60(),
+      home: Assign61(),
     );
   }
 }

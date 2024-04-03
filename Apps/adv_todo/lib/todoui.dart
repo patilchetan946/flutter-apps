@@ -17,13 +17,6 @@ class _TODOAppUIState extends State<TODOAppUI> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-
-    // createDatabase();
-  }
-
   Future<void> submit(bool doedit, [Taskclass? taskclassobj]) async {
     if (titleController.text.trim().isNotEmpty &&
         descriptionController.text.trim().isNotEmpty &&
@@ -52,10 +45,10 @@ class _TODOAppUIState extends State<TODOAppUI> {
     dateController.clear();
   }
 
-  void removeTasks(Taskclass taskclassobj) {
-    setState(() {
-      cardlist.remove(taskclassobj);
-    });
+  void removeTasks(Taskclass taskclassobj) async {
+    deleteTaskData(taskclassobj);
+    cardlist = await getTaskData();
+    setState(() {});
   }
 
   void editTask(Taskclass taskclassObj) {

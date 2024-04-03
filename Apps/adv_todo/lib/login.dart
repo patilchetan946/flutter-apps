@@ -20,9 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController userNameTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
 
-  List userdata = [
-    const User(userid: "patilchetan", password: "patilchetan123")
-  ];
+  List userdata = [const User(userid: "patil", password: "patil123")];
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
