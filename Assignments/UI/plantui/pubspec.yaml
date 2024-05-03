@@ -1,0 +1,37 @@
+name: plantui
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.3.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_fonts: ^6.2.1
+  flutter_svg: ^2.0.10+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+   - assets\plant1.png
+   - assets\rings.png
+   - assets\plant2.png
+   - assets\right_rings.png
+   - assets\shopping-bag.png
+   - assets\Spider_Plant.png
+   - assets\plant3.png
+   - assets\shopping-bag_small.png
+   - assets\homering.png
+   - assets\height.png
+   - assets\pot.png
+   - assets\temp.png
+   - assets\shopping_white.png
+   - assets\Three_dot.png
+
