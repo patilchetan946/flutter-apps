@@ -137,7 +137,7 @@ class DetailScreenState extends State<DetailScreen> {
                               const Icon(
                                 Icons.bed,
                                 size: 30,
-                                color: Color.fromRGBO(0, 0, 0, 1),
+                                color: Color.fromRGBO(90, 90, 90, 1),
                               ),
                               const SizedBox(height: 10),
                               Text(
@@ -175,7 +175,7 @@ class DetailScreenState extends State<DetailScreen> {
                               const Icon(
                                 Icons.bathtub,
                                 size: 30,
-                                color: Color.fromRGBO(0, 0, 0, 1),
+                                color: Color.fromRGBO(90, 90, 90, 1),
                               ),
                               const SizedBox(height: 10),
                               Text(
@@ -213,7 +213,7 @@ class DetailScreenState extends State<DetailScreen> {
                               const Icon(
                                 Icons.fullscreen_sharp,
                                 size: 30,
-                                color: Color.fromRGBO(0, 0, 0, 1),
+                                color: Color.fromRGBO(90, 90, 90, 1),
                               ),
                               const SizedBox(height: 10),
                               Text(
