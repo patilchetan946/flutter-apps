@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:music_app_ui/Controller/navigationbar.dart';
+import "package:music_app_ui/Controller/navigationbar.dart";
 import 'package:music_app_ui/View/gallery.dart';
 
 class Home extends StatefulWidget {
@@ -45,7 +45,7 @@ class HomeState extends State {
                     setState(() {
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) {
-                        return const Gallery();
+                        return const BtmNavgtnBar();
                       }));
                     });
                   },
@@ -102,7 +102,6 @@ class HomeState extends State {
           ),
         ],
       ),
-      bottomNavigationBar: const BtmNavgtnBar(),
     );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:music_app_ui/View/gallery.dart';
+import 'package:music_app_ui/View/player.dart';
+import 'package:iconsax/iconsax.dart';
 
 class BtmNavgtnBar extends StatefulWidget {
   const BtmNavgtnBar({super.key});
@@ -8,18 +10,14 @@ class BtmNavgtnBar extends StatefulWidget {
 }
 
 class _BtmNavgtnBarState extends State {
-  int _selectedIndex = 0;
+  int _selectedIndex = 4;
 
   final List<Widget> _widgetOptions = <Widget>[
+    const Player(),
     const Gallery(),
     const Gallery(),
     const Gallery(),
     const Gallery(),
-    const Gallery(),
-    // const Search(),
-    // const Home(),
-    // const Cart(),
-    // const Profile(),
   ];
 
   @override
@@ -32,30 +30,28 @@ class _BtmNavgtnBarState extends State {
           BottomNavigationBarItem(
             backgroundColor: Color.fromRGBO(24, 24, 24, 1),
             icon: Icon(
-              Icons.favorite_border,
+              Iconsax.heart,
               color: Color.fromRGBO(157, 178, 206, 1),
             ),
             label: 'Favroite',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.search,
+              Iconsax.search_normal_1,
               color: Color.fromRGBO(157, 178, 206, 1),
             ),
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_filled,
-                color: Color.fromRGBO(157, 178, 206, 1)),
+            icon: Icon(Iconsax.home, color: Color.fromRGBO(157, 178, 206, 1)),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.card_travel,
-                color: Color.fromRGBO(157, 178, 206, 1)),
+            icon: Icon(Iconsax.bag, color: Color.fromRGBO(157, 178, 206, 1)),
             label: 'Cart',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person, color: Color.fromRGBO(157, 178, 206, 1)),
+            icon: Icon(Iconsax.user, color: Color.fromRGBO(157, 178, 206, 1)),
             label: 'Profile',
           ),
         ],
@@ -64,6 +60,9 @@ class _BtmNavgtnBarState extends State {
             _selectedIndex = index;
           });
         },
+        selectedIconTheme: const IconThemeData(
+          color: Color.fromRGBO(230, 154, 21, 1),
+        ),
         selectedItemColor: const Color.fromRGBO(230, 154, 21, 1),
       ),
       body: _widgetOptions.elementAt(_selectedIndex),
