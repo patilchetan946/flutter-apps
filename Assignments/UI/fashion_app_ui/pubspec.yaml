@@ -1,0 +1,34 @@
+name: fashion_app_ui
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.3.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_fonts: ^6.2.1
+  iconsax: ^0.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+  - assets\onboradImg.png
+  - assets\homeimg1.png
+  - assets\homeimg2.png
+  - assets\homeimg3.png
+  - assets\homeimg4.png
+  - assets\detlImg.png
+  - assets\Ellipse 14.png
+  - assets\Ellipse 15.png
+  - assets\Ellipse 16.png
+  - assets\cartimg.png
+  - assets\Rectangle 121.png
+  - assets\Group 17305.png
