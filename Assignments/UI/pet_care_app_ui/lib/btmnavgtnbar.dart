@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pet_care_app_ui/dashboard.dart';
@@ -39,48 +40,82 @@ class _HomeScreenState extends State<BtmNavigationBar> {
           children: [
             buildNavBarItem(Iconsax.house_2, 'Home', 0),
             buildNavBarItem(Icons.favorite_border, 'Service', 1),
-            // buildNavBarItem(Icons.shopping_cart, 'cart', 2),
-
-            //const SizedBox(width: 0),
+            const SizedBox(width: 0),
             buildNavBarItem(Icons.watch_later_outlined, 'History', 3),
             buildNavBarItem(Icons.person_3_outlined, 'Profile', 4),
           ],
         ),
       ),
-      floatingActionButton: ClipOval(
-        child: Material(
-          color: const Color.fromRGBO(245, 146, 69, 1),
-          elevation: 10,
-          child: InkWell(
-            onTap: () {
-              _onItemTapped(2);
-            },
-            child: SizedBox(
-              width: 56,
-              height: 56,
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    const Icon(
-                      Icons.shopping_cart_outlined,
-                      size: 22,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      "Shop",
-                      style: GoogleFonts.poppins(
-                          fontSize: 10,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500),
-                    )
-                  ],
-                ),
+      floatingActionButton: Container(
+        height: 75,
+        width: 75,
+        decoration: const BoxDecoration(
+          color: Color.fromRGBO(245, 146, 69, 1),
+          shape: BoxShape.circle,
+        ),
+        child: InkWell(
+          onTap: () {
+            _onItemTapped(2);
+          },
+          child: SizedBox(
+            width: 56,
+            height: 56,
+            child: Padding(
+              padding: const EdgeInsets.all(14),
+              child: Column(
+                children: [
+                  const Icon(
+                    Icons.shopping_cart_outlined,
+                    size: 24,
+                    color: Colors.white,
+                  ),
+                  Text(
+                    "Shop",
+                    style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500),
+                  )
+                ],
               ),
             ),
           ),
         ),
       ),
+      //  ClipOval(
+      //   child: Material(
+      //     color: const Color.fromRGBO(245, 146, 69, 1),
+      //     elevation: 10,
+      //     child: InkWell(
+      //       onTap: () {
+      //         _onItemTapped(2);
+      //       },
+      //       child: SizedBox(
+      //         width: 56,
+      //         height: 56,
+      //         child: Padding(
+      //           padding: const EdgeInsets.all(10),
+      //           child: Column(
+      //             children: [
+      //               const Icon(
+      //                 Icons.shopping_cart_outlined,
+      //                 size: 22,
+      //                 color: Colors.white,
+      //               ),
+      //               Text(
+      //                 "Shop",
+      //                 style: GoogleFonts.poppins(
+      //                     fontSize: 10,
+      //                     color: Colors.white,
+      //                     fontWeight: FontWeight.w500),
+      //               )
+      //             ],
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      // ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
